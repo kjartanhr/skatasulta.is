@@ -6,7 +6,9 @@ import Link from "next/link";
 import { Header } from "components/header";
 import { Frettavakt } from "components/svgs";
 
-export default async function HomePage() {
+export const dynamic = "force-dynamic";
+
+export default async function Home() {
     const payloadConfig = await config;
     const payload = await getPayload({ config: payloadConfig });
 
