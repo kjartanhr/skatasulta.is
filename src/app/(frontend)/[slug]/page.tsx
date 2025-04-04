@@ -4,7 +4,7 @@ import { getPayload } from "payload";
 import config from "@/payload.config";
 import { Header } from "components/header";
 import { Frettavakt } from "components/svgs";
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 import { convertLexicalToHTML } from "@payloadcms/richtext-lexical/html";
 import { format } from "date-fns";
 import { is } from "date-fns/locale/is";
@@ -59,7 +59,10 @@ export default async function Post({ params }: { params: Promise<{ slug: string 
     const header = await payload.findGlobal({ slug: "header" });
     const posts = await payload.find({
         collection: "posts",
-        where: { slug: { equals: slug }, published: { not_equals: null } },
+        where: {
+            or: [{ slug: { equals: slug } }, { humanSlug: { equals: slug } }],
+            published: { not_equals: null },
+        },
         limit: 1,
     });
 
@@ -67,6 +70,10 @@ export default async function Post({ params }: { params: Promise<{ slug: string 
 
     if (!post) {
         return notFound();
+    }
+
+    if (post.slug !== slug) {
+        return redirect(`/${post.slug}`);
     }
 
     return (
