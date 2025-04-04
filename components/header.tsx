@@ -1,10 +1,17 @@
 "use client";
 
 import { cn } from "lib/utils";
+import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
-export function Header() {
+export function Header({
+    startsScrolled,
+    logo,
+}: {
+    startsScrolled?: true;
+    logo: { urlDark?: string | null; urlLight?: string | null };
+}) {
     const [atTop, setAtTop] = useState(true);
 
     useEffect(() => {
@@ -23,16 +30,31 @@ export function Header() {
 
     return (
         <>
-            <header className="absolute top-0 left-0 z-[500] flex h-[6.25rem] w-full items-center">
+            <header
+                className={cn(
+                    "absolute top-0 left-0 z-[500] flex h-[6.25rem] w-full items-center",
+                    startsScrolled && "bg-white",
+                )}
+            >
                 <div className="w-full">
                     <div className="mx-auto max-w-[1920px] px-8">
-                        <Link
-                            href="/"
-                            className="flex items-center gap-2 select-none"
-                            draggable={false}
-                        >
-                            <h1 className="font-serif text-3xl font-bold text-white">Skátasulta</h1>
-                            <Jam className="-mb-2 h-8 w-8 rotate-[20deg] text-white" />
+                        <Link href="/" className="flex items-center gap-2">
+                            {!startsScrolled && logo.urlDark && (
+                                <Image
+                                    src={logo.urlDark}
+                                    alt="Merki Skátasultunnar"
+                                    width={220}
+                                    height={36}
+                                />
+                            )}
+                            {startsScrolled && logo.urlLight && (
+                                <Image
+                                    src={logo.urlLight}
+                                    alt="Merki Skátasultunnar"
+                                    width={220}
+                                    height={36}
+                                />
+                            )}
                         </Link>
                     </div>
                 </div>
@@ -40,17 +62,23 @@ export function Header() {
 
             <div
                 data-scrolled-top={atTop ? "true" : "false"}
-                className="fixed -top-[6.25rem] left-0 z-[600] flex h-[6.25rem] w-full items-center bg-white transition-transform duration-350 data-[scrolled-top=false]:translate-y-[6.25rem]"
+                className={cn(
+                    "fixed left-0 z-[600] flex h-[6.25rem] w-full items-center bg-white",
+                    !startsScrolled &&
+                        "-top-[6.25rem] transition-transform duration-350 data-[scrolled-top=false]:translate-y-[6.25rem]",
+                )}
             >
                 <div className="w-full">
                     <div className="mx-auto max-w-[1920px] px-8">
-                        <Link
-                            href="/"
-                            className="flex items-center gap-2 select-none"
-                            draggable={false}
-                        >
-                            <h1 className="font-serif text-3xl font-bold text-black">Skátasulta</h1>
-                            <Jam className="-mb-2 h-8 w-8 rotate-[20deg] text-black" />
+                        <Link href="/" className="flex items-center gap-2">
+                            {logo.urlLight && (
+                                <Image
+                                    src={logo.urlLight}
+                                    alt="Merki Skátasultunnar"
+                                    width={220}
+                                    height={36}
+                                />
+                            )}
                         </Link>
                     </div>
                 </div>

@@ -141,6 +141,7 @@ export const Posts: CollectionConfig = {
             admin: {
                 description:
                     "Dagsetning sem greinin er birt. Ef ekkert er fyllt inn sést greinin ekki.",
+                date: { pickerAppearance: "dayAndTime" },
             },
         },
         {
@@ -179,6 +180,7 @@ export const Posts: CollectionConfig = {
                 description:
                     "Ef fréttavakt hefur lokið, dagsetningin sem henni lauk á stimplast hér inn.",
                 condition: (data) => data.type === "watch",
+                date: { pickerAppearance: "dayAndTime" },
             },
         },
         {
@@ -257,6 +259,7 @@ export const Posts: CollectionConfig = {
                     admin: {
                         description:
                             "Dagsetning sem brotið er birt. Ef ekkert er fyllt inn sést greinin ekki.",
+                        date: { pickerAppearance: "dayAndTime" },
                     },
                 },
                 {
@@ -266,15 +269,6 @@ export const Posts: CollectionConfig = {
                     required: true,
                     admin: {
                         description: "Titillinn/fyrirsögn brotsins.",
-                    },
-                },
-                {
-                    label: "Mynd",
-                    name: "coverImage",
-                    type: "upload",
-                    relationTo: "media",
-                    admin: {
-                        description: "Mynd sem sýnist efst á broti.",
                     },
                 },
                 {
