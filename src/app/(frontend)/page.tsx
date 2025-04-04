@@ -22,7 +22,7 @@ export default async function Home() {
 
     // prettier-ignore
     const top = homepage?.featuredPost && typeof homepage.featuredPost !== "number" ? homepage.featuredPost : posts.docs[0];
-    const rest = posts.docs.slice(1);
+    const rest = posts.docs;
 
     return (
         <>
