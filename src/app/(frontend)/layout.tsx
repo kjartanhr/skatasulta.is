@@ -28,7 +28,7 @@ export const metadata = {
     title: "Skátasulta | Fregnir og fleira, ferskt úr krukkunni",
     metadataBase: new URL(process.env.BASE_URL ?? "https://skatasulta.is"),
     openGraph: {
-        siteName: "Skátasulta",
+        siteName: "Skátasulta | Stórasti vettvangur íslenskra skáta!",
     },
 } satisfies Metadata;
 
