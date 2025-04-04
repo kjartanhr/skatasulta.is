@@ -38,6 +38,7 @@ export async function generateMetadata(
 
     return {
         title: `${post.title} | Skátasulta`,
+        description: post.excerpt ?? undefined,
         openGraph: {
             images: coverImage ? [coverImage, ...previousImages] : previousImages,
             siteName: "Skátasulta",
