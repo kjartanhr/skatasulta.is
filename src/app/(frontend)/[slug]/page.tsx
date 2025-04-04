@@ -41,7 +41,7 @@ export async function generateMetadata(
         description: post.excerpt ?? undefined,
         openGraph: {
             images: coverImage ? [coverImage, ...previousImages] : previousImages,
-            siteName: "Skátasulta",
+            siteName: "Skátasulta | Stórasti vettvangur íslenskra skáta!",
         },
     };
 }
